@@ -14,8 +14,8 @@ let register = (data) => {
             //check input
             if(!data.username||!data.password||!data.email){
                 resolve({
-                    "errorCode":12,
-                    "message":"invalid input"
+                    "errorCode":4,
+                    "status":"invalid input datatype"
                 })
             }
             let user = await db.User.findOne({
@@ -32,26 +32,27 @@ let register = (data) => {
                 })
                 if(newUser){
                     resolve({
-                        "errorCode":10,
-                        "message":"sign up success"
+                        "errorCode":0,
+                        "status":"Success"
                     })
                 }else{
                     resolve({
-                        "errorCode":11,
-                        "message":"registration failed"
+                        "errorCode":1,
+                        "status":"Fail"
                     })
                 }
             }else{
                 resolve({
-                    "errorCode":13,
+                    "errorCode":1,
+                    "status":"Fail",
                     "message":"Email already used"
                 })
             }
         }catch(e){
             console.log(e)
             reject({
-                "errorCode":0,
-                "message":"Internal Server"
+                "errorCode":6,
+                "status":"Internal Server"
             })
         }
     })
@@ -64,8 +65,8 @@ let logIn = (data) => {
         try{
             if(!data.email||!data.password){
                 resolve({
-                    "errorCode":23,
-                    "message":"Invalid input"
+                    "errorCode":4,
+                    "status":"Invalid input datatype"
                 })
             }
             let infor = await db.User.findOne({
@@ -74,8 +75,8 @@ let logIn = (data) => {
             if(infor){
                 if(infor.password===data.password){
                     resolve({
-                        "errorCode":20,
-                        "message":"Login success!",
+                        "errorCode":0,
+                        "status":"Success",
                         "infor":{
                             "id":infor.id,
                             "userName":infor.userName,
@@ -85,14 +86,15 @@ let logIn = (data) => {
                     })
                 }else{
                     resolve({
-                        "errorCode":21,
-                        "message":"Login fail"
+                        "errorCode":1,
+                        "status":"Login fail"
                     })
                 }
             }else{
                 resolve({
-                    "errorCode":22,
-                    "message":"Invalid email or password "
+                    "errorCode":2,
+                    "status":"Data not found",
+                    "message":"Invalid email or password"
                 })
             }
 
@@ -100,7 +102,7 @@ let logIn = (data) => {
             console.log(e)
             reject({
                 "errorCode":0,
-                "message":"Internal Server"
+                "status":"Internal Server"
             })
         }
     })
@@ -113,16 +115,16 @@ let getProfileById = (token) =>{
         try{
             if(!token){
                 resolve({
-                    "errorCode":33,
-                    "message":"Invalid token"
+                    "errorCode":5,
+                    "status":"Invalid token"
                 })
             }
             let key = process.env.SECRET_KEY
             let verify = await jwt.verify(token,key)
             if(!verify){
                 resolve({
-                    "errorCode":33,
-                    "message":"Invalid token"
+                    "errorCode":5,
+                    "status":"Invalid token"
                 })
             }
             let userid = verify.id
@@ -131,8 +133,8 @@ let getProfileById = (token) =>{
             })
             if(user){
                 resolve({
-                    "errorCode":30,
-                    "message":"User found",
+                    "errorCode":0,
+                    "status":"Success",
                     "user":{
                         id : user.id,
                         email : user.email,
@@ -142,15 +144,15 @@ let getProfileById = (token) =>{
                 })
             }else{
                 resolve({
-                    "errorCode":31,
-                    "message":"User not found"
+                    "errorCode":2,
+                    "status":"Data not found"
                 })
             }
         }catch(e){
             console.log(e)
             reject({
                 "errorCode":0,
-                "message":"Internal Server"
+                "status":"Internal Server"
             })
         }
     })
@@ -164,8 +166,8 @@ let deleteUserById = (data) => {
         try{
             if(!data){
                 resolve({
-                    "errorCode":41,
-                    "message":"Invalid token"
+                    "errorCode":5,
+                    "status":"Invalid token"
                 })
             }
             let userid = data.id
@@ -174,20 +176,20 @@ let deleteUserById = (data) => {
             })
             if(!userid){
                 resolve({
-                    "errorCode":42,
-                    "message":"User not found"
+                    "errorCode":2,
+                    "status":"Data not found"
                 })
             }else{
                 let isSuccess = await user.destroy()
                 if(isSuccess){
                     resolve({
-                        "errorCode":40,
-                        "message":"Delete success"
+                        "errorCode":0,
+                        "status":"Success"
                     })
                 }else{
                     resolve({
-                        "errorCode":43,
-                        "message":"Dele"
+                        "errorCode":1,
+                        "status":"Fail"
                     })
                 }
 
@@ -197,7 +199,7 @@ let deleteUserById = (data) => {
             console.log(e)
             reject({
                 "errorCode":0,
-                "message":"Internal Server"
+                "status":"Internal Server"
 
             })
         }

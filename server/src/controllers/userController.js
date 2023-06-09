@@ -17,8 +17,8 @@ let signUp = async(req,res) => {
     }catch(e){
         console.log(e)
         res.status(500).json({
-            "errorCode":0,
-            "message":"Internal Server"
+            "errorCode":6,
+            "status":"Internal Server"
         })
     }
 }
@@ -35,7 +35,8 @@ let signIn = async(req,res) => {
         let token = await jwt.sign(payload,key)
         if(!token){
             res.status(200).json({
-                "errorCode":5,
+                "errorCode":1,
+                "status":"Fail",
                 "message":"Create token failed"
             })
         }else{
@@ -59,8 +60,8 @@ let profile = async (req,res) => {
     }catch(e){
         console.log(e)
         res.status(500).json({
-            "errorCode":0,
-            "message":"Internal Server"
+            "errorCode":6,
+            "status":"Internal Server"
         })
     }
 
@@ -75,13 +76,13 @@ let deleteUser =async (req,res) => {
     try{
         let isSuccess = await userHandler.deleteUserById(req.body)
         if(isSuccess){
-            res.status(200).json("delete success")
+            res.status(200).json(isSuccess)
         }
     }catch(e){
         console.log(e)
         res.status(500).json({
             "errorCode":0,
-            "message":"Internal Server"
+            "status":"Internal Server"
         })
     }
 }
