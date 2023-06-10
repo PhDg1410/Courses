@@ -13,7 +13,7 @@ let initWebRoutes = (app) => {
 
     router.get("/profile",userController.profile)
 
-    router.get("/delete-user",userController.deleteUser)
+    router.delete("/delete-user",userController.deleteUser)
 
     //course API 
 
@@ -21,7 +21,7 @@ let initWebRoutes = (app) => {
 
     router.get("/get-course",courseController.getCourse)
 
-    router.post("/delete-course",courseController.deleteCourse)
+    router.delete("/delete-course",courseController.deleteCourse)
 
     //lesson API 
 

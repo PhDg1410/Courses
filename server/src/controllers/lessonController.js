@@ -12,11 +12,14 @@ let createLesson = async (req,res) => {
     try{
         let lesson = await lessonHandler.createNewLesson(req.body)
         if(lesson){
-            res.status(200).json("new lesson created")
+            res.status(200).json(lesson)
         }
     }catch(e){
         console.log(e)
-        res.status(200).json("error")
+        res.status(500).json({
+            "errorCode":6,
+            "status":"Internal Server"
+        })
     }
 
 }
@@ -26,17 +29,15 @@ let createLesson = async (req,res) => {
 
 let getLesson = async (req,res) => {
     try{
-        let lessonid = req.body.id
+        let lessonid = req.query.id
         let lesson = await lessonHandler.getLessonById(lessonid)
-        if(lesson){
-            res.status(200).json(lesson)
-        }else{
-            res.status.json("lesson not found")
-        }
-
+        res.status(200).json(lesson)
     }catch(e){
         console.log(e)
-        res.status(200).json("error")
+        res.status(200).json({
+            "errorCode":6,
+            "status":"Internal Server"
+        })
     }
 }
 
@@ -46,14 +47,13 @@ let deleteLesson = async(req,res) => {
     try{
         let lessonid = req.body.id
         let isSuccess = await lessonHandler.deleteLessonById(lessonid)
-        if(isSuccess){
-            res.status(200).json("delete lesson success")
-        }else{
-            res.status(200).json("something wrong")
-        }
+        res.status(200).json(isSuccess)
     }catch(e){
         console.log(e)
-        res.status(200).json("error")
+        res.status(200).json({
+            "errorCode":6,
+            "status":"Internal Server"
+        })
     }
 }
 

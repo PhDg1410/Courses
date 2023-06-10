@@ -6,20 +6,45 @@ import db from "../models/index"
 let createNewLesson = (data) => {
     return new Promise(async (resolve,reject) => {
         try{
-            let isExist = await db.Lesson.findOne({
-                where : {lessonName : data.lessonName}
+            let checkCourse = await db.Course.findOne({
+                where : {id : data.course_id}
             })
-            if(!isExist){
-                let newLesson = await db.Lesson.create({
-                    lessonName : data.lessonName,
-                    course_id: data.course_id,
-                    description: data.description,
-                    detail: data.detail
+            if(!checkCourse){
+                resolve({
+                    "errorCode":2,
+                    "status":"Data not found",
+                    "message":'Course not found'
                 })
-                resolve(newLesson)
-            }      
+            }else{
+                let isExist = await db.Lesson.findOne({
+                    where : {lessonName : data.lessonName}
+                })
+                if(!isExist){
+                    let newLesson = await db.Lesson.create({
+                        lessonName : data.lessonName,
+                        course_id: data.course_id,
+                        description: data.description,
+                        detail: data.detail
+                    })
+                    resolve({
+                        "errorCode":0,
+                        "status":"Success",
+                        newLesson
+                    })
+                }else{
+                    resolve({
+                        "errorCode":1,
+                        "status":"Fail"
+                    })
+                }
+            }
+            
         }catch(e){
-            reject(e)
+            console.log(e)
+            reject({
+                "errorCode":6,
+                "status":"Internal Server"
+            })
         }
     })
 }
@@ -33,12 +58,24 @@ let getLessonById = (lessonid) => {
                 where : { id : lessonid }
             })
             if(lesson){
-                resolve(lesson)
+                resolve({
+                    "errorCode":0,
+                    "message":"Success",
+                    lesson
+                })
             }else{
-                resolve(false)
+                resolve({
+                    "errorCode":2,
+                    "status":"Data not found",
+                    "message":"Lesson not found"
+                })
             }
         }catch(e){
-            reject(e)
+            console.log(e)
+            reject({
+                "errorCode":6,
+                "status":"Internal Server"
+            })
         }
     })
 
@@ -52,15 +89,32 @@ let deleteLessonById = (lessonid) => {
             let lesson = await db.Lesson.findOne({
                 where : {id : lessonid}
             })
-            let isSuccess = await lesson.destroy()
-            if(isSuccess){
-                resolve(isSuccess)
+            if(!lesson){
+                resolve({
+                    "errorCode":2,
+                    "status":"Data not found",
+                    "message":"Lesson not found"
+                })
             }else{
-                resolve(false)
+                let isSuccess = await lesson.destroy()
+                if(isSuccess){
+                    resolve({
+                        "errorCode":0,
+                        "status":"Success"
+                    })
+            }else{
+                resolve({
+                    "errorCode":1,
+                    "status":"Fail"
+                })
             }
-
+            }
         }catch(e){
-            reject(e)
+            console.log(e)
+            reject({
+                "errorCode":6,
+                "status":"Internal Server"
+            })
         }
     })
 

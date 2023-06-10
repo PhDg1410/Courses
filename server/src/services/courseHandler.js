@@ -17,36 +17,60 @@ let createCourse = (data) => {
                     description : data.description,
                     price : data.price
                 })
-                resolve(newCourse)
+                resolve({
+                    "errorCode":0,
+                    "status":"Success",
+                    "newCourse":{
+                        newCourse
+                    }
+                })
             }else{
-                //error handle
+                resolve({
+                    "errorCode":1,
+                    "status":"Fail",
+                    "message":"Course already exist"
+                })
             }
 
         }catch(e){
-            reject(e)
+            console.log(e)
+            reject({
+                "errorCode":6,
+                "status":"Internal Server"
+            })
         }
     })
 
 }
 
 
-//get course 
+//get all course 
 
 let getAllCourse = () => {
     return new Promise(async(resolve,reject) => {
         try{
             let allCourse = await db.Course.findAll()
             if(allCourse){
-                resolve(allCourse)
+                resolve({
+                    "errorCode":0,
+                    "status":"Success",
+                    allCourse
+                })
             }else{
-                resolve(false)
+                resolve({
+                    "errorCode":1,
+                    "status":"Fail"
+                })
             }
         }catch(e){
-            reject(e)
+            reject({
+                "errorCode":6,
+                "status":"Internal Server"
+            })
         }
     })
-
 }
+
 
 //delete course
 
@@ -58,11 +82,23 @@ let deleteCourseById = (courseid) => {
             })
             if(course){
                 let isSuccess = await course.destroy()
-                resolve(isSuccess)
+                console.log(isSuccess)
+                resolve({
+                    "errorCode":0,
+                    "status":"Success"
+                })
+            }else{
+                resolve({
+                    "errorCode":1,
+                    "status":"Fail",
+                    "message":"Course does not exist"
+                })
             }
-
         }catch(e){
-            reject(e)
+            reject({
+                "errorCode":6,
+                "status":"Internal Server"
+            })
         }
     })
 }

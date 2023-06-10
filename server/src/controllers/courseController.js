@@ -11,14 +11,13 @@ require("dotenv").config()
 let createNewCourse = async (req,res) =>{
     try{
         let newCourse = await courseHandler.createCourse(req.body)
-        
-        if(newCourse){
-            res.status(200).json("new course create")
-        }
-
+        res.status(200).json(newCourse)
     }catch(e){
         console.log(e)
-        res.status(200).json("error")
+        res.status(200).json({
+            "errorCode":6,
+            "status":"Internal Server"
+        })
     }
 }
 
@@ -30,7 +29,10 @@ let getCourse = async (req,res) => {
     res.status(200).json(course)
 
    }catch(e){
-        res.status(200).json("error")
+        res.status(500).json({
+            "errorCode":6,
+            "status":"Internal Server"
+        })
    }
 }
 
@@ -38,10 +40,16 @@ let getCourse = async (req,res) => {
 //delete course 
 
 let deleteCourse =async (req,res) => {
-    let courseid = req.body.id
-    let isSuccess = await courseHandler.deleteCourseById(courseid)
-    if(isSuccess){
-        res.status(200).json("delete course success")
+    try{
+        let courseid = req.body.id
+        let result = await courseHandler.deleteCourseById(courseid)
+        res.status(200).json(result)
+
+    }catch(e){
+        res.status(500).json({
+            "errorCode":6,
+            "status":"Internal Server"
+        })
     }
 }
 
