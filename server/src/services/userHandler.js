@@ -192,9 +192,7 @@ let deleteUserById = (data) => {
                         "status":"Fail"
                     })
                 }
-
-            }
-            
+            }   
         }catch(e){
             console.log(e)
             reject({
