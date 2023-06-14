@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "",
+    "password": "Course@2023",
     "database": "online_courses",
     "host": "localhost",
     "dialect": "mysql"
