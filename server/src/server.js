@@ -14,7 +14,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser())
 initWebRoutes(app);
-// connectDB();
+connectDB();
 
 const port = process.env.PORT || 8000;
 const ip = '0.0.0.0'
