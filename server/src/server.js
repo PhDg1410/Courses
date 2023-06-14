@@ -16,10 +16,11 @@ app.use(cookieParser())
 initWebRoutes(app);
 connectDB();
 
-let port = process.env.PORT || 6969;
+const port = process.env.PORT || 8000;
+const ip = '0.0.0.0'
 
 
 
-app.listen(port, () => {
+app.listen(port,ip, () => {
   console.log("Backend Nodejs is running on the port : " + port);
 });
