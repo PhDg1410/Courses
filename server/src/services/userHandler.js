@@ -87,7 +87,7 @@ let logIn = (data) => {
                 }else{
                     resolve({
                         "errorCode":1,
-                        "status":"Login fail"
+                        "status":"Fail"
                     })
                 }
             }else{
