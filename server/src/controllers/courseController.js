@@ -13,6 +13,7 @@ let createNewCourse = async (req,res) =>{
         let newCourse = await courseHandler.createCourse(req.body)
         res.status(200).json(newCourse)
     }catch(e){
+        logger.error(e, { functionName: createNewCourse.name });
         console.log(e)
         res.status(200).json({
             "errorCode":6,
@@ -29,6 +30,7 @@ let getCourse = async (req,res) => {
     res.status(200).json(course)
 
    }catch(e){
+        logger.error(e, { functionName: getCourse.name });
         res.status(500).json({
             "errorCode":6,
             "status":"Internal Server"
@@ -46,6 +48,7 @@ let deleteCourse =async (req,res) => {
         res.status(200).json(result)
 
     }catch(e){
+        logger.error(e, { functionName: deleteCourse.name });
         res.status(500).json({
             "errorCode":6,
             "status":"Internal Server"

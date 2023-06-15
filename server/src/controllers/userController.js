@@ -15,6 +15,7 @@ let signUp = async(req,res) => {
         res.status(200).json(user)
 
     }catch(e){
+        logger.error(e, { functionName: signUp.name });
         console.log(e)
         res.status(500).json({
             "errorCode":6,
@@ -35,13 +36,14 @@ let signIn = async(req,res) => {
             console.log(payload)
             let token = await jwt.sign(payload,key)
             if(!token){
+                logger.error(e, { functionName: signIn.name });
                 res.status(200).json({
                     "errorCode":1,
                     "status":"Fail",
                     "message":"Create token failed"
                 })
             }else{
-                res.cookie("accessToken",token,{ maxAge: 3600000, httpOnly: true })
+                res.cookie("accessToken",token,{ maxAge: 3600000, httpOnly: true})
                 res.status(200).json(user)
             }
         
@@ -63,6 +65,7 @@ let profile = async (req,res) => {
         let response = await userHandler.getProfileById(token)
         res.status(200).json(response)
     }catch(e){
+        logger.error(e, { functionName: profile.name });
         console.log(e)
         res.status(500).json({
             "errorCode":6,
@@ -84,6 +87,7 @@ let deleteUser =async (req,res) => {
             res.status(200).json(isSuccess)
         }
     }catch(e){
+        logger.error(e, { functionName: deleteUser.name });
         console.log(e)
         res.status(500).json({
             "errorCode":0,

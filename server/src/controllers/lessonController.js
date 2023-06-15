@@ -15,7 +15,7 @@ let createLesson = async (req,res) => {
             res.status(200).json(lesson)
         }
     }catch(e){
-        console.log(e)
+        logger.error(e, { functionName: createLesson.name });
         res.status(500).json({
             "errorCode":6,
             "status":"Internal Server"
@@ -33,7 +33,7 @@ let getLesson = async (req,res) => {
         let lesson = await lessonHandler.getLessonById(lessonid)
         res.status(200).json(lesson)
     }catch(e){
-        console.log(e)
+        logger.error(e, { functionName: getLesson.name });
         res.status(200).json({
             "errorCode":6,
             "status":"Internal Server"
@@ -49,6 +49,7 @@ let deleteLesson = async(req,res) => {
         let isSuccess = await lessonHandler.deleteLessonById(lessonid)
         res.status(200).json(isSuccess)
     }catch(e){
+        logger.error(e, { functionName: deleteLesson.name });
         console.log(e)
         res.status(200).json({
             "errorCode":6,

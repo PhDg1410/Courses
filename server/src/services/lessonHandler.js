@@ -40,6 +40,7 @@ let createNewLesson = (data) => {
             }
             
         }catch(e){
+            logger.error(e, { functionName: createNewLesson.name });
             console.log(e)
             reject({
                 "errorCode":6,
@@ -71,6 +72,7 @@ let getLessonById = (lessonid) => {
                 })
             }
         }catch(e){
+            logger.error(e, { functionName: getLessonById.name });
             console.log(e)
             reject({
                 "errorCode":6,
@@ -110,6 +112,7 @@ let deleteLessonById = (lessonid) => {
             }
             }
         }catch(e){
+            logger.error(e, { functionName: deleteLessonById.name });
             console.log(e)
             reject({
                 "errorCode":6,

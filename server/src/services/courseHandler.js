@@ -33,6 +33,7 @@ let createCourse = (data) => {
             }
 
         }catch(e){
+            logger.error(e, { functionName: createCourse.name });
             console.log(e)
             reject({
                 "errorCode":6,
@@ -63,6 +64,7 @@ let getAllCourse = () => {
                 })
             }
         }catch(e){
+            logger.error(e, { functionName: getAllCourse.name });
             reject({
                 "errorCode":6,
                 "status":"Internal Server"
@@ -95,6 +97,7 @@ let deleteCourseById = (courseid) => {
                 })
             }
         }catch(e){
+            logger.error(e, { functionName: deleteCourseById.name });
             reject({
                 "errorCode":6,
                 "status":"Internal Server"
