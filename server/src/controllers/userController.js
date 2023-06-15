@@ -40,7 +40,7 @@ let signIn = async(req,res) => {
                 "message":"Create token failed"
             })
         }else{
-            res.cookie("accessToken",token,{ maxAge: 3600000, httpOnly: true })
+            res.cookie("accessToken",token,{ maxAge: 3600000 })
             res.status(200).json(user)
         }
         
