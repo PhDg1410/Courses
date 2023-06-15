@@ -46,7 +46,7 @@ let signIn = async(req,res) => {
             }
         
         }else{
-            res.status(200).json("test")
+            res.status(200).json(user)
         }
 
     }catch(e){
