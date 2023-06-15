@@ -26,26 +26,31 @@ let signUp = async(req,res) => {
 //sign-in 
 //done
 let signIn = async(req,res) => {
-    let user = await userHandler.logIn(req.body)
-    if(user.errorCode===20){
-        // let token = await tokenHandler.genToken({"userid":user.id})
-        let key = process.env.SECRET_KEY
-        let payload = {id : user.infor.id}
-        console.log(payload)
-        let token = await jwt.sign(payload,key)
-        if(!token){
-            res.status(200).json({
-                "errorCode":1,
-                "status":"Fail",
-                "message":"Create token failed"
-            })
-        }else{
-            res.cookie("accessToken",token,{ maxAge: 3600000 })
-            res.status(200).json(user)
-        }
+    try{
+        let user = await userHandler.logIn(req.body)
+        if(!user.errorCode){
+            // let token = await tokenHandler.genToken({"userid":user.id})
+            let key = process.env.SECRET_KEY
+            let payload = {id : user.infor.id}
+            console.log(payload)
+            let token = await jwt.sign(payload,key)
+            if(!token){
+                res.status(200).json({
+                    "errorCode":1,
+                    "status":"Fail",
+                    "message":"Create token failed"
+                })
+            }else{
+                res.cookie("accessToken",token,{ maxAge: 3600000, httpOnly: true })
+                res.status(200).json(user)
+            }
         
-    }else{
-        res.status(200).json(user)
+        }else{
+            res.status(200).json("test")
+        }
+
+    }catch(e){
+        console.log(e)
     }
 }
 
