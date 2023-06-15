@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken"
 import db from "../models/index"
 import user from "../models/user"
+import logger from "../log/log"
 require("dotenv").config()
 
 
@@ -49,6 +50,7 @@ let register = (data) => {
                 })
             }
         }catch(e){
+            logger.error(e, { functionName: register.name });
             console.log(e)
             reject({
                 "errorCode":6,
@@ -99,6 +101,7 @@ let logIn = (data) => {
             }
 
         }catch(e){
+            logger.error(e, { functionName: logIn.name });
             console.log(e)
             reject({
                 "errorCode":0,
@@ -149,6 +152,7 @@ let getProfileById = (token) =>{
                 })
             }
         }catch(e){
+            logger.error(e, { functionName: getProfileById.name });
             console.log(e)
             reject({
                 "errorCode":0,
@@ -194,11 +198,11 @@ let deleteUserById = (data) => {
                 }
             }   
         }catch(e){
+            logger.error(e, {functionName: deleteUserById.name});
             console.log(e)
             reject({
                 "errorCode":0,
                 "status":"Internal Server"
-
             })
         }
     })
