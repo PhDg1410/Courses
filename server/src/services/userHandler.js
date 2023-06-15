@@ -23,7 +23,7 @@ let register = (data) => {
             })
             if(!user){
                 let newUser = await db.User.create({
-                    userName : data.userName,
+                    userName : data.username,
                     email : data.email,
                     role: "user",
                     active: true,
