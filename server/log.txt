@@ -1,0 +1,7 @@
+[2023-06-16T04:35:36.005Z] error in undefined: test Log
+[2023-06-16T04:38:25.019Z] error in getProfileById: Invalid token
+[2023-06-16T04:39:35.527Z] error in getProfileById: JsonWebTokenError: jwt must be provided
+[2023-06-16T04:44:06.531Z] error in createCourse: testlog from course
+[2023-06-16T06:51:22.677Z] error in getProfileById: JsonWebTokenError: jwt must be provided
+[2023-06-16T07:34:37.324Z] error in getProfileById: JsonWebTokenError: jwt must be provided
+[2023-06-16T07:35:02.026Z] error in getProfileById: JsonWebTokenError: jwt must be provided

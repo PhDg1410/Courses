@@ -14,16 +14,6 @@ const logger = winston.createLogger({
   ]
 });
 
-function testFunction() {
-  try {
-    console.log(x)
-  } catch (error) {
-    logger.error(error, { functionName: testFunction.name });
-  }
-}
-
-// testFunction();
-
 module.exports = {
     logger:logger
 }

@@ -9,6 +9,12 @@ require("dotenv").config()
 let createCourse = (data) => {
     return new Promise(async(resolve,reject) => {
         try{
+            if(!data.courseName||!data.description||!data.price){
+                resolve({
+                    "errorCode":3,
+                    "status":"Missing input data"
+                })
+            }
             let isExist = await db.Course.findOne({
                 where : { courseName : data.courseName }
             })
@@ -34,8 +40,7 @@ let createCourse = (data) => {
             }
 
         }catch(e){
-            // logError.logger.error(e, { functionName: createCourse.name });
-            console.log(e)
+            logError.logger.error(e, { functionName: createCourse.name });
             reject({
                 "errorCode":6,
                 "status":"Internal Server"
@@ -65,7 +70,7 @@ let getAllCourse = () => {
                 })
             }
         }catch(e){
-            // logError.logger.error(e, { functionName: getAllCourse.name });
+            logError.logger.error(e, { functionName: getAllCourse.name });
             reject({
                 "errorCode":6,
                 "status":"Internal Server"
@@ -98,7 +103,7 @@ let deleteCourseById = (courseid) => {
                 })
             }
         }catch(e){
-            // logError.logger.error(e, { functionName: deleteCourseById.name });
+            logError.logger.error(e, { functionName: deleteCourseById.name });
             reject({
                 "errorCode":6,
                 "status":"Internal Server"

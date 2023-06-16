@@ -41,8 +41,8 @@ let createNewLesson = (data) => {
             }
             
         }catch(e){
-            // logError.logger.error(e, { functionName: createNewLesson.name });
-            console.log(e)
+            logError.logger.error(e, { functionName: createNewLesson.name });
+            // console.log(e)
             reject({
                 "errorCode":6,
                 "status":"Internal Server"
