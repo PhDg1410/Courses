@@ -1,4 +1,0 @@
-[2023-06-16T03:39:43.153Z] error in testFunction: ReferenceError: x is not defined
-[2023-06-16T03:39:52.630Z] error in testFunction: ReferenceError: x is not defined
-[2023-06-16T03:40:02.700Z] error in testFunction: ReferenceError: x is not defined
-[2023-06-16T03:40:31.449Z] error in testFunction: ReferenceError: x is not defined
