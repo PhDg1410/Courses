@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken"
 import db from "../models/index"
 import user from "../models/user"
+import logError from "../log/logError"
 require("dotenv").config()
 
 //create course 
@@ -33,7 +34,7 @@ let createCourse = (data) => {
             }
 
         }catch(e){
-            logger.error(e, { functionName: createCourse.name });
+            // logError.logger.error(e, { functionName: createCourse.name });
             console.log(e)
             reject({
                 "errorCode":6,
@@ -64,7 +65,7 @@ let getAllCourse = () => {
                 })
             }
         }catch(e){
-            logger.error(e, { functionName: getAllCourse.name });
+            // logError.logger.error(e, { functionName: getAllCourse.name });
             reject({
                 "errorCode":6,
                 "status":"Internal Server"
@@ -97,7 +98,7 @@ let deleteCourseById = (courseid) => {
                 })
             }
         }catch(e){
-            logger.error(e, { functionName: deleteCourseById.name });
+            // logError.logger.error(e, { functionName: deleteCourseById.name });
             reject({
                 "errorCode":6,
                 "status":"Internal Server"

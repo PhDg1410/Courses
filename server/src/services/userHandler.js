@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 import db from "../models/index"
 import user from "../models/user"
-import logger from "../log/log"
+// import logError from "../log/logError"
 require("dotenv").config()
 
 
@@ -50,8 +50,7 @@ let register = (data) => {
                 })
             }
         }catch(e){
-            logger.error(e, { functionName: register.name });
-            console.log(e)
+            // logError.logger.error(e, { functionName: register.name });
             reject({
                 "errorCode":6,
                 "status":"Internal Server"
@@ -101,10 +100,9 @@ let logIn = (data) => {
             }
 
         }catch(e){
-            logger.error(e, { functionName: logIn.name });
-            console.log(e)
+            // logError.logger.error(e, { functionName: logIn.name });
             reject({
-                "errorCode":0,
+                "errorCode":6,
                 "status":"Internal Server"
             })
         }
@@ -117,6 +115,7 @@ let getProfileById = (token) =>{
     return new Promise(async(resolve,reject) => {
         try{
             if(!token){
+                // logError.logger.error("Invalid token",{ functionName: getProfileById.name}
                 resolve({
                     "errorCode":5,
                     "status":"Invalid token"
@@ -152,10 +151,10 @@ let getProfileById = (token) =>{
                 })
             }
         }catch(e){
-            logger.error(e, { functionName: getProfileById.name });
-            console.log(e)
+            // console.log(e)
+            // logError.logger.error(e, { functionName: getProfileById.name });
             reject({
-                "errorCode":0,
+                "errorCode":6,
                 "status":"Internal Server"
             })
         }
@@ -198,10 +197,9 @@ let deleteUserById = (data) => {
                 }
             }   
         }catch(e){
-            logger.error(e, {functionName: deleteUserById.name});
-            console.log(e)
+            // logError.logger.error(e, {functionName: deleteUserById.name});
             reject({
-                "errorCode":0,
+                "errorCode":6,
                 "status":"Internal Server"
             })
         }

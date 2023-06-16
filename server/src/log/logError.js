@@ -22,7 +22,7 @@ function testFunction() {
   }
 }
 
-testFunction();
+// testFunction();
 
 module.exports = {
     logger:logger

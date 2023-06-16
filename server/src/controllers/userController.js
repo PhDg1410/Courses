@@ -5,6 +5,8 @@ import cookieParser from 'cookie-parser'
 import user from '../models/user'
 import { where } from 'sequelize'
 import tokenHandler from "../services/tokenHandler"
+// import logError from "../log/logError"
+
 require("dotenv").config()
 
 //sign-up 
@@ -15,8 +17,7 @@ let signUp = async(req,res) => {
         res.status(200).json(user)
 
     }catch(e){
-        logger.error(e, { functionName: signUp.name });
-        console.log(e)
+        // logError.logger.error(e, { functionName: signUp.name });
         res.status(500).json({
             "errorCode":6,
             "status":"Internal Server"
@@ -33,10 +34,9 @@ let signIn = async(req,res) => {
             // let token = await tokenHandler.genToken({"userid":user.id})
             let key = process.env.SECRET_KEY
             let payload = {id : user.infor.id}
-            console.log(payload)
             let token = await jwt.sign(payload,key)
             if(!token){
-                logger.error(e, { functionName: signIn.name });
+                // logError.logger.error(e, { functionName: signIn.name });
                 res.status(200).json({
                     "errorCode":1,
                     "status":"Fail",
@@ -52,7 +52,11 @@ let signIn = async(req,res) => {
         }
 
     }catch(e){
-        console.log(e)
+        // logError.logger.error(e, { functionName: signIn.name });
+        res.status(500).json({
+            "errorCode":6,
+            "status":"Internal Server"
+        })
     }
 }
 
@@ -65,8 +69,7 @@ let profile = async (req,res) => {
         let response = await userHandler.getProfileById(token)
         res.status(200).json(response)
     }catch(e){
-        logger.error(e, { functionName: profile.name });
-        console.log(e)
+        // logError.logger.error(e, { functionName: profile.name });
         res.status(500).json({
             "errorCode":6,
             "status":"Internal Server"
@@ -74,6 +77,7 @@ let profile = async (req,res) => {
     }
 
 }
+
 
 //update profile 
 
@@ -87,10 +91,9 @@ let deleteUser =async (req,res) => {
             res.status(200).json(isSuccess)
         }
     }catch(e){
-        logger.error(e, { functionName: deleteUser.name });
-        console.log(e)
+        // logError.logger.error(e, { functionName: deleteUser.name });
         res.status(500).json({
-            "errorCode":0,
+            "errorCode":6,
             "status":"Internal Server"
         })
     }
