@@ -41,7 +41,7 @@ let initWebRoutes = (app) => {
 
     //test nginx
 
-  router.get("/test",(req,res) => {
+  router.get("/api/test",(req,res) => {
     res.send("test nginx success")
   })
 
