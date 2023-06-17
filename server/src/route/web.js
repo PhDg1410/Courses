@@ -39,7 +39,11 @@ let initWebRoutes = (app) => {
     router.get("/checkToken",middleware.testCheck)
 
 
+    //test nginx
 
+  router.get("/test",(req,res) => {
+    res.send("test nginx success")
+  })
 
 
     return app.use('/',router);
