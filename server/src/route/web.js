@@ -7,29 +7,29 @@ let router = express.Router();
 let initWebRoutes = (app) => {
 
     //user API 
-    router.post("/sign-up",userController.signUp)
+    router.post("/api/sign-up",userController.signUp)
 
-    router.post("/sign-in",userController.signIn)
+    router.post("/api/sign-in",userController.signIn)
 
-    router.get("/profile",userController.profile)
+    router.get("/api/profile",userController.profile)
 
-    router.delete("/delete-user",userController.deleteUser)
+    router.delete("/api/delete-user",userController.deleteUser)
 
     //course API 
 
-    router.post("/create-course",courseController.createNewCourse)
+    router.post("/api/create-course",courseController.createNewCourse)
 
-    router.get("/get-course",courseController.getCourse)
+    router.get("/api/get-course",courseController.getCourse)
 
-    router.delete("/delete-course",courseController.deleteCourse)
+    router.delete("/api/delete-course",courseController.deleteCourse)
 
     //lesson API 
 
-    router.post("/create-lesson",lessonController.createLesson)
+    router.post("/api/create-lesson",lessonController.createLesson)
 
-    router.get("/get-lesson",lessonController.getLesson)
+    router.get("/api/get-lesson",lessonController.getLesson)
 
-    router.delete("/delete-lesson",lessonController.deleteLesson)
+    router.delete("/api/delete-lesson",lessonController.deleteLesson)
     
 
     //test
