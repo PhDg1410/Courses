@@ -43,7 +43,8 @@ let signIn = async(req,res) => {
                     "message":"Create token failed"
                 })
             }else{
-                res.cookie("accessToken",token,{ maxAge: 3600000, httpOnly: true})
+                // res.cookie("accessToken",token,{ maxAge: 3600000, httpOnly: true})
+                res.setHeader("Authorization",`Bearer ${token}`)
                 res.status(200).json(user)
             }
         
@@ -65,7 +66,14 @@ let signIn = async(req,res) => {
 //done
 let profile = async (req,res) => {
     try{
-        let token = req.cookies.accessToken
+        const authHeader = req.headers.authorization
+        if(!authHeader){
+            res.status(401).json({
+                "errorCode":7,
+                "status":"Missing authorization header"
+            })
+        }
+        const token = authHeader.split(" ")[1]
         let response = await userHandler.getProfileById(token)
         res.status(200).json(response)
     }catch(e){
