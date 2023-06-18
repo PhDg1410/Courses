@@ -73,7 +73,7 @@ let getLessonById = (lessonid) => {
                 })
             }
         }catch(e){
-            // logError.logger.error(e, { functionName: getLessonById.name });
+            logError.logger.error(e, { functionName: getLessonById.name });
             console.log(e)
             reject({
                 "errorCode":6,
@@ -113,7 +113,7 @@ let deleteLessonById = (lessonid) => {
             }
             }
         }catch(e){
-            // logError.logger.error(e, { functionName: deleteLessonById.name });
+            logError.logger.error(e, { functionName: deleteLessonById.name });
             console.log(e)
             reject({
                 "errorCode":6,

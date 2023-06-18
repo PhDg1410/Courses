@@ -3,7 +3,7 @@ import lessonHandler from "../services/lessonHandler"
 import jwt from 'jsonwebtoken'
 import cookieParser from 'cookie-parser'
 import user from '../models/user'
-// import logError from "../log/logError"
+import logError from "../log/logError"
 
 require("dotenv").config()
 
@@ -16,7 +16,7 @@ let createLesson = async (req,res) => {
             res.status(200).json(lesson)
         }
     }catch(e){
-        // logError.logger.error(e, { functionName: createLesson.name });
+        logError.logger.error(e, { functionName: createLesson.name });
         res.status(500).json({
             "errorCode":6,
             "status":"Internal Server"
@@ -34,7 +34,7 @@ let getLesson = async (req,res) => {
         let lesson = await lessonHandler.getLessonById(lessonid)
         res.status(200).json(lesson)
     }catch(e){
-        // logError.logger.error(e, { functionName: getLesson.name });
+        logError.logger.error(e, { functionName: getLesson.name });
         res.status(200).json({
             "errorCode":6,
             "status":"Internal Server"
@@ -50,7 +50,7 @@ let deleteLesson = async(req,res) => {
         let isSuccess = await lessonHandler.deleteLessonById(lessonid)
         res.status(200).json(isSuccess)
     }catch(e){
-        // logError.logger.error(e, { functionName: deleteLesson.name });
+        logError.logger.error(e, { functionName: deleteLesson.name });
         console.log(e)
         res.status(200).json({
             "errorCode":6,

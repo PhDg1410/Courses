@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 import cookieParser from 'cookie-parser'
 import user from '../models/user'
 import { where } from 'sequelize'
-// import logError from "../log/logError"
+import logError from "../log/logError"
 require("dotenv").config()
 
 //create new course 
@@ -14,7 +14,7 @@ let createNewCourse = async (req,res) =>{
         let newCourse = await courseHandler.createCourse(req.body)
         res.status(200).json(newCourse)
     }catch(e){
-        // logError.logger.error(e, { functionName: createNewCourse.name });
+        logError.logger.error(e, { functionName: createNewCourse.name });
         console.log(e)
         res.status(200).json({
             "errorCode":6,
@@ -31,7 +31,7 @@ let getCourse = async (req,res) => {
     res.status(200).json(course)
 
    }catch(e){
-        // logError.logger.error(e, { functionName: getCourse.name });
+        logError.logger.error(e, { functionName: getCourse.name });
         res.status(500).json({
             "errorCode":6,
             "status":"Internal Server"
@@ -49,7 +49,7 @@ let deleteCourse =async (req,res) => {
         res.status(200).json(result)
 
     }catch(e){
-        // logError.logger.error(e, { functionName: deleteCourse.name });
+        logError.logger.error(e, { functionName: deleteCourse.name });
         res.status(500).json({
             "errorCode":6,
             "status":"Internal Server"
