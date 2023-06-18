@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser'
 import user from '../models/user'
 import { where } from 'sequelize'
 import tokenHandler from "../services/tokenHandler"
-// import logError from "../log/logError"
+import logError from "../log/logError"
 
 require("dotenv").config()
 
@@ -17,7 +17,7 @@ let signUp = async(req,res) => {
         res.status(200).json(user)
 
     }catch(e){
-        // logError.logger.error(e, { functionName: signUp.name });
+        logError.logger.error(e, { functionName: signUp.name });
         res.status(500).json({
             "errorCode":6,
             "status":"Internal Server"
@@ -36,15 +36,15 @@ let signIn = async(req,res) => {
             let payload = {id : user.infor.id}
             let token = await jwt.sign(payload,key)
             if(!token){
-                // logError.logger.error(e, { functionName: signIn.name });
                 res.status(200).json({
                     "errorCode":1,
                     "status":"Fail",
                     "message":"Create token failed"
                 })
+            
             }else{
                 // res.cookie("accessToken",token,{ maxAge: 3600000, httpOnly: true})
-                res.setHeader("Authorization",`Bearer ${token}`)
+                user.token = token
                 res.status(200).json(user)
             }
         
@@ -53,7 +53,7 @@ let signIn = async(req,res) => {
         }
 
     }catch(e){
-        // logError.logger.error(e, { functionName: signIn.name });
+        logError.logger.error(e, { functionName: signIn.name });
         res.status(500).json({
             "errorCode":6,
             "status":"Internal Server"
@@ -72,12 +72,14 @@ let profile = async (req,res) => {
                 "errorCode":7,
                 "status":"Missing authorization header"
             })
+        }else{
+            const token = authHeader.split(" ")[1]
+            let response = await userHandler.getProfileById(token)
+            res.status(200).json(response)
         }
-        const token = authHeader.split(" ")[1]
-        let response = await userHandler.getProfileById(token)
-        res.status(200).json(response)
+        
     }catch(e){
-        // logError.logger.error(e, { functionName: profile.name });
+        logError.logger.error(e, { functionName: profile.name });
         res.status(500).json({
             "errorCode":6,
             "status":"Internal Server"
@@ -99,7 +101,7 @@ let deleteUser =async (req,res) => {
             res.status(200).json(isSuccess)
         }
     }catch(e){
-        // logError.logger.error(e, { functionName: deleteUser.name });
+        logError.logger.error(e, { functionName: deleteUser.name });
         res.status(500).json({
             "errorCode":6,
             "status":"Internal Server"
