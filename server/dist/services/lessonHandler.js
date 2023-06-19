@@ -115,6 +115,8 @@ var getLessonById = function getLessonById(lessonid) {
           case 3:
             lesson = _context2.sent;
             if (lesson) {
+              lesson.description = JSON.parse(lesson.description);
+              lesson.content = JSON.parse(lesson.content);
               resolve({
                 "errorCode": 0,
                 "message": "Success",
