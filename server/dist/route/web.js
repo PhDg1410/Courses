@@ -25,16 +25,8 @@ var initWebRoutes = function initWebRoutes(app) {
   router.post("/api/create-lesson", _lessonController["default"].createLesson);
   router.get("/api/get-lesson", _lessonController["default"].getLesson);
   router["delete"]("/api/delete-lesson", _lessonController["default"].deleteLesson);
-
-  //test
-
-  router.get("/testToken", _middleware["default"].testToken);
-  router.get("/checkToken", _middleware["default"].testCheck);
-
-  //test nginx
-
   router.get("/api/test", function (req, res) {
-    res.send("test nginx success");
+    res.send("test success");
   });
   return app.use('/', router);
 };

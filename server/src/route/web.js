@@ -31,7 +31,9 @@ let initWebRoutes = (app) => {
 
     router.delete("/api/delete-lesson",lessonController.deleteLesson)
     
-
+    router.get("/api/test",(req,res) => {
+      res.send("test success")
+    })
     
 
 
