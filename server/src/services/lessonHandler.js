@@ -61,7 +61,7 @@ let getLessonById = (lessonid) => {
             })
             if(lesson){
                lesson.description = JSON.parse(lesson.description)
-               lesson.content = JSON.parse(lesson.content)
+               lesson.detail = JSON.parse(lesson.detail)
                 resolve({
                     "errorCode":0,
                     "message":"Success",
