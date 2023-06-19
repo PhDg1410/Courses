@@ -32,18 +32,7 @@ let initWebRoutes = (app) => {
     router.delete("/api/delete-lesson",lessonController.deleteLesson)
     
 
-    //test
-
-    router.get("/testToken",middleware.testToken)
-
-    router.get("/checkToken",middleware.testCheck)
-
-
-    //test nginx
-
-  router.get("/api/test",(req,res) => {
-    res.send("test nginx success")
-  })
+    
 
 
     return app.use('/',router);
