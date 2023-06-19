@@ -41,7 +41,7 @@ module.exports = function (sequelize, DataTypes) {
     lessonName: DataTypes.STRING,
     course_id: DataTypes.INTEGER,
     description: DataTypes.TEXT,
-    detail: DataTypes.STRING
+    detail: DataTypes.TEXT
   }, {
     sequelize: sequelize,
     modelName: 'Lesson'
