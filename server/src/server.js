@@ -16,7 +16,7 @@ app.use(cookieParser())
 initWebRoutes(app);
 connectDB();
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8080;
 const ip = '0.0.0.0'
 
 
