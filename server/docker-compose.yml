@@ -24,6 +24,8 @@ services:
       # - DB_HOST=host.docker.internal
     ports:
       - 8000:8000
+    depends_on:
+      - database-mysql
 volumes:
   db:
 # docker compose -p hoidanit-nodejs-mysql up -d

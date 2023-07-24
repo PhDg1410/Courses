@@ -18,7 +18,16 @@ module.exports = {
       description: {
         type: Sequelize.TEXT
       },
-      detail: {
+      risk: {
+        type: Sequelize.TEXT
+      },
+      attack: {
+        type: Sequelize.TEXT
+      },
+      detect: {
+        type: Sequelize.TEXT
+      },
+      recommendation: {
         type: Sequelize.TEXT
       },
       createdAt: {

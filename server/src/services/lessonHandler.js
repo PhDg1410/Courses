@@ -25,7 +25,10 @@ let createNewLesson = (data) => {
                         lessonName : data.lessonName,
                         course_id: data.course_id,
                         description: data.description,
-                        detail: data.detail
+                        risk : data.risk,
+                        attack : data.attack,
+                        detect : data.detect,
+                        recommendation : data.recommendation
                     })
                     resolve({
                         "errorCode":0,
@@ -60,8 +63,6 @@ let getLessonById = (lessonid) => {
                 where : { id : lessonid }
             })
             if(lesson){
-               lesson.description = JSON.parse(lesson.description)
-               lesson.detail = JSON.parse(lesson.detail)
                 resolve({
                     "errorCode":0,
                     "message":"Success",

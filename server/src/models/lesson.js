@@ -17,7 +17,10 @@ module.exports = (sequelize, DataTypes) => {
     lessonName: DataTypes.STRING,
     course_id: DataTypes.INTEGER,
     description: DataTypes.TEXT,
-    detail: DataTypes.TEXT,
+    risk: DataTypes.TEXT,
+    attack: DataTypes.TEXT,
+    detect: DataTypes.TEXT,
+    recommendation: DataTypes.TEXT,
   }, {
     sequelize,
     modelName: 'Lesson',

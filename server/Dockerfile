@@ -11,6 +11,7 @@ RUN npm install -g @babel/core @babel/cli
 
 COPY . .
 RUN npm run build-src
+# RUN npx sequelize-cli db:migrate
 CMD ["npm","run","build"]
 
 #docker build --tag node-docker .
