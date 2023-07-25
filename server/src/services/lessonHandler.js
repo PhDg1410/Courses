@@ -107,6 +107,33 @@ let getLessonById = (lessonid) => {
 
 //delete lesson 
 
+// let deleteLessonById = (lessonid) => {
+//     return new Promise(async(resolve,reject) => {
+//         try{
+//             console.log(lessonid)
+//             let test = await db.Lesson.findOne({
+//                 where : {id : lessonid}
+//             })
+//             console.log(test)
+//             if(test){
+//                 let isSuccess = db.Lesson.destroy({
+//                     where : {id : lessonid}
+//                 })
+//                 resolve(isSuccess)
+                
+//             }
+
+//         }catch(e){
+//             logError.logger.error(e, { functionName: deleteLessonById.name });
+//             console.log(e)
+//             reject({
+//                 "errorCode":6,
+//                 "status":"Internal Server 1"
+//             })
+//         }
+//     })
+// }
+
 let deleteLessonById = (lessonid) => {
     return new Promise(async(resolve,reject) => {
         try{
@@ -120,7 +147,10 @@ let deleteLessonById = (lessonid) => {
                     "message":"Lesson not found"
                 })
             }else{
-                let isSuccess = await lesson.destroy()
+            //    let  isSuccess = "test"
+                let isSuccess = await db.Lesson.destroy({
+                    where : {id : lessonid}
+                })
                 if(isSuccess){
                     resolve({
                         "errorCode":0,
@@ -138,7 +168,7 @@ let deleteLessonById = (lessonid) => {
             console.log(e)
             reject({
                 "errorCode":6,
-                "status":"Internal Server"
+                "status":"Internal Server "
             })
         }
     })

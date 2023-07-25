@@ -5,3 +5,25 @@
 [2023-06-16T06:51:22.677Z] error in getProfileById: JsonWebTokenError: jwt must be provided
 [2023-06-16T07:34:37.324Z] error in getProfileById: JsonWebTokenError: jwt must be provided
 [2023-06-16T07:35:02.026Z] error in getProfileById: JsonWebTokenError: jwt must be provided
+[2023-07-25T03:49:37.467Z] error in deleteLessonById: SequelizeDatabaseError: Table 'online_courses.lessons' doesn't exist
+[2023-07-25T03:49:37.483Z] error in deleteLesson: [object Object]
+[2023-07-25T03:50:18.665Z] error in deleteLessonById: SequelizeDatabaseError: Table 'online_courses.lessons' doesn't exist
+[2023-07-25T03:50:18.677Z] error in deleteLesson: [object Object]
+[2023-07-25T03:55:44.896Z] error in deleteLessonById: ReferenceError: isSuccess is not defined
+[2023-07-25T03:55:44.928Z] error in deleteLesson: [object Object]
+[2023-07-25T03:56:45.164Z] error in deleteLessonById: TypeError: lesson.destroy is not a function
+[2023-07-25T03:56:45.192Z] error in deleteLesson: [object Object]
+[2023-07-25T04:03:34.870Z] error in deleteLessonById: ReferenceError: id is not defined
+[2023-07-25T04:03:34.942Z] error in deleteLesson: [object Object]
+[2023-07-25T04:04:38.514Z] error in deleteLessonById: TypeError: lesson.destroy is not a function
+[2023-07-25T04:04:38.543Z] error in deleteLesson: [object Object]
+[2023-07-25T04:05:23.375Z] error in deleteLessonById: ReferenceError: lesson is not defined
+[2023-07-25T04:05:23.404Z] error in deleteLesson: [object Object]
+[2023-07-25T04:05:46.832Z] error in deleteLessonById: TypeError: test.destroy is not a function
+[2023-07-25T04:05:46.859Z] error in deleteLesson: [object Object]
+[2023-07-25T04:07:09.461Z] error in deleteLessonById: TypeError: test.destroy is not a function
+[2023-07-25T04:07:09.465Z] error in deleteLesson: [object Object]
+[2023-07-25T04:09:17.831Z] error in deleteLessonById: TypeError: test.destroy is not a function
+[2023-07-25T04:09:17.858Z] error in deleteLesson: [object Object]
+[2023-07-25T04:11:27.530Z] error in deleteLessonById: ReferenceError: Lesson is not defined
+[2023-07-25T04:11:27.557Z] error in deleteLesson: [object Object]
