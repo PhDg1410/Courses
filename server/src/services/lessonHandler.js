@@ -59,21 +59,39 @@ let createNewLesson = (data) => {
 let getLessonById = (lessonid) => {
     return new Promise(async(resolve,reject) => {
         try{
-            let lesson = await db.Lesson.findOne({
-                where : { id : lessonid }
-            })
-            if(lesson){
-                resolve({
-                    "errorCode":0,
-                    "message":"Success",
-                    lesson
+            if(lessonid){
+                let lesson = await db.Lesson.findOne({
+                    where : { id : lessonid }
                 })
-            }else{
-                resolve({
-                    "errorCode":2,
-                    "status":"Data not found",
-                    "message":"Lesson not found"
-                })
+                if(lesson){
+                    resolve({
+                        "errorCode":0,
+                        "message":"Success",
+                        lesson
+                    })
+                }else{
+                    resolve({
+                        "errorCode":2,
+                        "status":"Data not found",
+                        "message":"Lesson not found"
+                    })
+                }
+            }
+            else{
+                let allLesson = await db.Lesson.findAll()
+                if(allLesson){
+                    resolve({
+                        "errorCode":0,
+                        "message":"Success",
+                        allLesson
+                    })
+                }else{
+                    resolve({
+                        "errorCode":2,
+                        "status":"Data not found",
+                        "message":"Lesson not found"
+                    })
+                }
             }
         }catch(e){
             logError.logger.error(e, { functionName: getLessonById.name });
